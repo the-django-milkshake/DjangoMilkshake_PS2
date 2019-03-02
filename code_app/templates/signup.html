@@ -1,0 +1,33 @@
+{% extends 'home-base.html' %}
+
+
+{% block title %}Signup{% endblock %}
+
+
+{% block body %}
+
+{% load static %}
+
+  <!-- Hero section -->
+    <section class="hero-section">
+    <div class="container-fluid" style="padding-left:10%">
+      <div class="row">
+        <div class="col-md-6 hero-text" id="login-signup-col">
+          <p>
+            <form method="post" enctype="multipart/form-data" class="hero-subscribe-form-compact">
+              <h2>Sign Up</h2><br>
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="site-btn sb-gradients">Signup</button>
+            </form>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img src="{% static 'img/laptop.png' %}" class="laptop-image" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Hero section end -->
+
+{% endblock %}

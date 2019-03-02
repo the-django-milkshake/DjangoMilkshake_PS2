@@ -1,0 +1,233 @@
+{% extends 'home-base.html' %}
+
+{% load static %}
+
+	{% block title %}Django Milkshake - Home{% endblock %}
+
+{% block body %}
+
+	<!-- Hero section -->
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 hero-text">
+					<h2>Your Personal <span>Portfolio Manager</span></h2>
+					<h4>Use our high tech <b>Stock prediction Algorithms</b> to invest in the correct stocks and get the best returns.</h4>
+					<form class="hero-subscribe-form">
+						<!-- <input type="text" placeholder="Enter your email"> -->
+						<a href="{% url 'signup' %}"><button type="button" class="site-btn sb-gradients">Get Started</button></a>
+					</form>
+				</div>
+				<div class="col-md-6">
+					<img src="{% static 'img/laptop.png' %}" class="laptop-image" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+
+	<!-- About section -->
+	<section class="about-section spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 offset-lg-6 about-text">
+					<h2>What is Portfolio Managing</h2>
+					<h5>Portfolio Managers keep track of your stocks and your profits.</h5>
+					<p>We use machine learning algorithms to give you the best advice for which stocks to invest in and the best time to buy and sell your favourite stocks. We provide relevant news that may affect your stock prices and do stock evaluation for you, eliminating that annoying pen and paper research stage.</p>
+					<a href="{% url 'signup' %}" class="site-btn sb-gradients sbg-line mt-5">Get Started</a>
+				</div>
+			</div>
+			<div class="about-img">
+				<img src="{% static 'img/about-img.png' %}" alt="">
+			</div>
+		</div>
+	</section>
+	<!-- About section end -->
+
+
+	<!-- Blog section -->
+	<section class="blog-section spad gradient-bg">
+		<div class="container text-white">
+			<div class="section-title text-center">
+				<h2>Latest News</h2>
+				<p>
+					The stock market heavily depends on the latest news. Catch up on stocks related news here. <br>
+					<span style="color: #ccc">Powered by Google News.</span>
+				</p>
+			</div>
+			<div class="row">
+				<!-- blog item -->
+				<div class="col-md-4">
+					<div class="blog-item">
+						<figure class="blog-thumb">
+							<img src="{% static 'img/blog/1.jpg' %}" alt="">
+						</figure>
+						<div class="blog-text">
+							<div class="post-date">03 jan 2018</div>
+							<h4 class="blog-title"><a href="">Coinbase to Reopen the GDAX Bitcoin Cash-Euro Order Book</a></h4>
+							<div class="post-meta">
+								<a href=""><span>by</span> Admin</a>
+								<a href=""><i class="fa fa-heart-o"></i> 234 Likes</a>
+								<a href=""><i class="fa fa-comments-o"></i> 08 comments</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- blog item -->
+				<div class="col-md-4">
+					<div class="blog-item">
+						<figure class="blog-thumb">
+							<img src="{% static 'img/blog/2.jpg' %}" alt="">
+						</figure>
+						<div class="blog-text">
+							<div class="post-date">28 dec 2018</div>
+							<h4 class="blog-title"><a href="">Blockchain Rolls Out Trading Feature for 22 States in the U.S</a></h4>
+							<div class="post-meta">
+								<a href=""><span>by</span> Admin</a>
+								<a href=""><i class="fa fa-heart-o"></i> 234 Likes</a>
+								<a href=""><i class="fa fa-comments-o"></i> 08 comments</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- blog item -->
+				<div class="col-md-4">
+					<div class="blog-item">
+						<figure class="blog-thumb">
+							<img src="{% static 'img/blog/3.jpg' %}" alt="">
+						</figure>
+						<div class="blog-text">
+							<div class="post-date">28 aug 2018</div>
+							<h4 class="blog-title"><a href="">This Week in Bitcoin: Up, Down and Sideways</a></h4>
+							<div class="post-meta">
+								<a href=""><span>by</span> Admin</a>
+								<a href=""><i class="fa fa-heart-o"></i> 234 Likes</a>
+								<a href=""><i class="fa fa-comments-o"></i> 08 comments</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+
+
+	<!-- Team section -->
+	<section class="team-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h2>Meet Our Team</h2>
+				<p>This is the team behind this impressive startup!</p>
+			</div>
+		</div>
+		<div class="team-members clearfix">
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{% static 'img/member/1.jpg' %}"></div>
+					<h2>Arnav Parekhji</h2>
+					<span>Data Analyst</span>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{% static 'img/member/1.jpg' %}"></div>
+					<div class="member-meta">
+						<h2>Arnav Parekhji</h2>
+						<span>Data Analyst</span>
+					</div>
+					<p>Arnav Parekhji is primarily a Data Analyst. He has great intuition about Machine Learning and how to train models that give the highest accuracy. He is the one who has written all the Machine Learning Code for this website.</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{% static 'img/member/2.jpg' %}"></div>
+					<h2>Ankit Gupta</h2>
+					<span>Full Stack Developer</span>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{% static 'img/member/2.jpg' %}"></div>
+					<div class="member-meta">
+						<h2>Ankit Gupta</h2>
+						<span>Full Stack Developer</span>
+					</div>
+					<p>Ankit Gupta is a Full-Stack Developer who contributed to this homepage and the website organisation in the backend. He also uses his blended knowledge of both fields to integrate both sides together.</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{% static 'img/member/3.jpg' %}"></div>
+					<h2>Heeket Mehta</h2>
+					<span>Backend Developer</span>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{% static 'img/member/3.jpg' %}"></div>
+					<div class="member-meta">
+						<h2>Heeket Mehta</h2>
+					<span>Backend Developer</span>
+					</div>
+					<p>Heeket Mehta is a Backend Developer. He designed the database and came up with the beautiful charts visible to you on the dashboard. He works hard and fast, you will barely see him coding yet he finishes the most integral work.</p>
+				</div>
+			</div>
+			<!-- Team member -->
+			<div class="member">
+				<div class="member-text">
+					<div class="member-img set-bg" data-setbg="{% static 'img/member/4.jpg' %}"></div>
+					<h2>Shanay Shah</h2>
+					<span>Frontend Developer</span>
+				</div>
+				<div class="member-info">
+					<div class="member-img mf set-bg" data-setbg="{% static 'img/member/4.jpg' %}"></div>
+					<div class="member-meta">
+						<h2>Shanay Shah</h2>
+					<span>Frontend Developer</span>
+					</div>
+					<p>Shanay Shah is our Frontend Developer. Think our website is pretty? Thank Shanay! He has an eye for UI Design like no one else. He worked on placement of information and colour schemes. From the navbar to  the footer, all you see is Shanay's brainchild.</p>
+				</div>
+			</div>
+			<!-- Team member -->
+		</div>
+	</section>
+	<!-- Team section -->
+
+
+	<!-- Fact section -->
+	<section class="fact-section gradient-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="fact">
+						<h2>4</h2>
+						<p>Team <br> Mates</p>
+						<i class="ti-user"></i>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="fact">
+						<h2>500</h2>
+						<p>S&P 500 <br>Companies</p>
+						<i class="ti-briefcase"></i>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="fact">
+						<h2>50K</h2>
+						<p>Happy <br> Customers</p>
+						<i class="ti-face-smile"></i>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="fact">
+						<h2>5</h2>
+						<p>Prediction <br> Algorithms</p>
+						<i class="ti-stats-up"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Fact section end -->
+
+{% endblock %}
