@@ -1,9 +1,43 @@
 {% extends 'base_dash.html' %}
 
-{% block title %}Django Milkshake - {{abbr}}{% endblock %}
-
 {% load static %}
 
+{% block title %}Django Milkshake - {{abbr}}{% endblock %}
+
+{% block extra_js %}
+{% endblock %}
+
 {% block body %}
-{{abbr}} - {{name}}
+<div class="container content">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h2>{{abbr}}</h2>
+				</div>
+				<div class="card-body row">
+					<div class="col-md-6">
+						<h4>{{name}}</h4>
+						{% if greater %}
+						<span style="color: green">{{current_price}}<i class="fa fa-sort-up"></i> {{percent|floatformat:2 }}%</span>
+						{% else %}
+						<span style="color: red">{{current_price}}<i class="fa fa-sort-down"></i> {{percent}}%</span>
+						{% endif %}<br>
+						Based on our machine learning correlation algorithms, our recommendation is to:<br>
+						<h4 style="color: #63d8f1">{{recommendation}}</h4>
+						<hr>
+						<h3>Monte Carlo Prediction</h3>
+						By running the Monte Carlo prediction algorithm, we have the following percent probabilities of profit and loss:<br>
+						Profit-<h4 style="color: #63d8f1">{{profit|floatformat:4}}%</h4><br>
+						Loss-<h4 style="color: #63d8f1">{{loss|floatformat:4}}%</h4><br>
+					</div>
+					<div class="col-md-6">
+						<img src="{% static 'img/stocks' %}/{{abbr}}.png" height="auto" width="100%">
+						<img src="{% static 'img/monte-carlo' %}/{{abbr}}.png" height="auto" width="100%">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

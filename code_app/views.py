@@ -9,15 +9,46 @@ from .models import *
 from .forms import *
 from django.contrib.auth import authenticate , login
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 import pandas as pd
 import os
-from django.conf import settings
+from code_app.machineLearningForStocks import do_ml
+from code_app.MonteCarloForStocks import runMonteCarlo
 
 @login_required()
 def stock(request, *args, **kwargs):
 	abbr = kwargs['abbr']
 	name = getStockNameFromTicker(abbr)
-	return render(request, 'stock.html', {'abbr':abbr, 'name':name})
+	current_price = getStockPrice(name)
+	yesterday_price = getStockPrice(name, 1)
+	percent = (current_price - yesterday_price)/current_price
+	greater = True if current_price > yesterday_price else False
+
+	confidence, count = do_ml(abbr)
+	recommendation_val = max(count)
+	if recommendation_val == 0:
+		recommendation = "HOLD"
+	elif recommendation_val == -1:
+		recommendation = "SELL"
+	else:
+		recommendation = "BUY"
+
+	profit, loss = runMonteCarlo(abbr)
+
+	return render(request, 'stock.html', {'abbr':abbr, 'name':name, 'current_price': current_price, 'yesterday_price': yesterday_price, 
+				 'greater': greater, 'percent':percent, 'recommendation': recommendation, 'profit':profit, 'loss':loss})
+
+
+@login_required()
+def search(request):
+	if request.method == 'POST':
+		try:
+			data = request.POST.get('search')
+			return redirect('stock', abbr=getStockTickerFromName(data))
+		except Exception as e:
+			print(e)
+			pass
+	return redirect('dash')
 
 
 def signup(request):
@@ -54,7 +85,7 @@ def dash(request):
 		if form.is_valid():
 			stock_name = form.cleaned_data.get('stock_name')
 			number = form.cleaned_data.get('number')
-			price = getStockPrice(stock_name)
+			price = form.cleaned_data.get('price')
 			trans = UserStocksTransaction.objects.create(user_id=request.user.id, stock_name=stock_name, number=number, price=price)
 			try:
 				userstock = UserStock.objects.get(user_id=request.user.id, stock_name=stock_name)
@@ -80,7 +111,7 @@ def dash(request):
 
 """			Helper functions   			"""
 
-def getStockPrice(stock_name):
+def getStockPrice(stock_name, past_days=0):
 	df = pd.read_csv(os.path.join(settings.BASE_DIR, 'code_app/sp500tickersandnames.csv'))
 	i = 0
 	for name in df['Names']:
@@ -99,7 +130,7 @@ def getStockPrice(stock_name):
 		f.write(dfx)
 		f.close()
 		df = pd.read_csv(filename)
-	price = df['adjusted_close'][0]
+	price = df['adjusted_close'][past_days]
 	return price
 
 

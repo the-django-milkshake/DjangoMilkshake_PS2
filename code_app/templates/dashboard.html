@@ -28,8 +28,8 @@
                                         <tr>
                                             <td>{{ forloop.counter }}</td>
                                             <td><a href="{% url 'stock' abbr=stock.ticker %}">{{ stock.stock_name }}</a></td>
-                                            <td>{{ stock.current_price }}</td>
-                                            <td>{{ stock.price }}</td>
+                                            <td>$ {{ stock.current_price|floatformat:2 }}</td>
+                                            <td>$ {{ stock.price|floatformat:2 }}</td>
                                             {% if stock.profit_bool %}
                                             <td style="color: green">{{ stock.diff|floatformat:2 }}%</td>
                                             {% else %}
@@ -39,12 +39,12 @@
                                         </tr>
                                         {% endfor %}
                                     </table>
-                                    <button onclick="$('#add-form').toggle()">Add More</button>
+                                    <button onclick="$('#add-form').toggle()" class="btn btn-round btn-primary">Add More</button>
                                     <form id="add-form" style="display: none" method="post">
                                       <h2>Add Stock</h2><br>
                                       {% csrf_token %}
                                       {{ form.as_p }}
-                                      <button type="submit" class="site-btn sb-gradients">Add</button>
+                                      <button type="submit" class="btn btn-round btn-fill btn-primary">Add</button>
                                     </form>
                                 </div>
                             </div>

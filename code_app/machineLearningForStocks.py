@@ -5,10 +5,12 @@ from collections import Counter
 from sklearn import preprocessing, model_selection, svm, neighbors
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import VotingClassifier, RandomForestClassifier
+import os
+from django.conf import settings
 
 def process_data_for_labels(ticker):
     hm_days = 7
-    df = pd.read_csv('sp500_joined_closes.csv', index_col = 0)
+    df = pd.read_csv(os.path.join(settings.BASE_DIR, 'code_app/sp500_joined_closes.csv'), index_col = 0)
     tickers = df.columns.values.tolist()
     df.fillna(0, inplace = True)
 
@@ -75,20 +77,20 @@ def do_ml(ticker):
     print('Accuracy: ', confidence)
     print('Predicted Spread: ', Counter(predictions))
 
-    return confidence
+    return confidence, Counter(predictions)
 
-df = pd.read_csv('sp500tickersandnames.csv')
-company_name = input("Enter: ")
-i = 0
-for name in df['Names']:
-    if name == company_name:
-        n = df['Tickers'][i]
-        break
-    i += 1
+# df = pd.read_csv('sp500tickersandnames.csv')
+# company_name = input("Enter: ")
+# i = 0
+# for name in df['Names']:
+#     if name == company_name:
+#         n = df['Tickers'][i]
+#         break
+#     i += 1
 
-print(n)
+# print(n)
 
-do_ml(n)
+# do_ml(n)
 
 
 

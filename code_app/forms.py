@@ -19,7 +19,8 @@ class SignupForm(UserCreationForm):
 class AddStockTransactionForm(forms.Form):
 	stock_name = forms.CharField(label='Stock', max_length=100)
 	number = forms.IntegerField(label='Quantity')
+	price = forms.FloatField(label='price')
 
 	class Meta:
 		model = UserStocksTransaction
-		fields = ('stock_name', 'number')
+		fields = ('stock_name', 'number', 'price')
