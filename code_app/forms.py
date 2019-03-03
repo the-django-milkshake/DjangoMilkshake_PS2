@@ -14,3 +14,12 @@ class SignupForm(UserCreationForm):
 	class Meta:
 		model = User
 		fields = ('username','password1','password2','first_name','last_name')
+
+
+class AddStockTransactionForm(forms.Form):
+	stock_name = forms.CharField(label='Stock', max_length=100)
+	number = forms.IntegerField(label='Quantity')
+
+	class Meta:
+		model = UserStocksTransaction
+		fields = ('stock_name', 'number')
