@@ -9,6 +9,7 @@ urlpatterns = [
     # url(r'^alpha',views.alphavantage_api,name="alpha"),
     url(r'^dashboard/$', views.dash, name="dash"),
     url(r'^stock/(?P<abbr>([\w]+))/$', views.stock, name="stock"),
+    url(r'^newspage$', views.newspage, name="newspage"),
     url(r'^signup/$',views.signup ,name = "signup"),
     url(r'^login/$',auth_views.LoginView.as_view(),name = "login"),
     url(r'^logout/$', auth_views.LogoutView.as_view(), name="logout"),

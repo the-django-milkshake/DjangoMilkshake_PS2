@@ -49,7 +49,40 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+<!--                         <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Your Real Estate</h4>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Index</th>
+                                            <th>Name</th>
+                                            <th>Current Price</th>
+                                            <th>Your Purchase Price</th>
+                                            <th>Profit/Loss</th>
+                                            <th>Zip Code</th>
+                                        </tr>
+                                        {% for house in user_real_estate_data %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td><a href="{% url 'stock' abbr=stock.ticker %}">{{ house.name }}</a></td>
+                                            <td>$ {{ house.current_price|floatformat:2 }}</td>
+                                            <td>$ {{ house.price|floatformat:2 }}</td>
+                                            {% if house.profit_bool %}
+                                            <td style="color: green">{{ house.diff|floatformat:2 }}%</td>
+                                            {% else %}
+                                            <td style="color: red">{{ house.diff|floatformat:2 }}%</td>
+                                            {% endif %}
+                                            <td>{{ house.pincode }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+ -->                        <div class="col-md-4">
                             <div class="card ">
                                 <div class="card-header ">
                                     <h4 class="card-title">Stock Statistics</h4>
@@ -94,7 +127,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+<!--                     <div class="row">
                         <div class="col-md-6">
                             <div class="card ">
                                 <div class="card-header ">
@@ -253,7 +286,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             {% endblock %}

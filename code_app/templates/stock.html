@@ -22,9 +22,14 @@
 						<span style="color: green">{{current_price}}<i class="fa fa-sort-up"></i> {{percent|floatformat:2 }}%</span>
 						{% else %}
 						<span style="color: red">{{current_price}}<i class="fa fa-sort-down"></i> {{percent}}%</span>
-						{% endif %}<br>
+						{% endif %}<br><br>
 						Based on our machine learning correlation algorithms, our recommendation is to:<br>
 						<h4 style="color: #63d8f1">{{recommendation}}</h4>
+					</div>
+					<div class="col-md-6">
+						<img src="{% static 'img/stocks' %}/{{abbr}}.png" height="auto" width="100%">
+					</div>
+					<div class="col-md-6">
 						<hr>
 						<h3>Monte Carlo Prediction</h3>
 						By running the Monte Carlo prediction algorithm, we have the following percent probabilities of profit and loss:<br>
@@ -32,7 +37,6 @@
 						Loss-<h4 style="color: #63d8f1">{{loss|floatformat:4}}%</h4><br>
 					</div>
 					<div class="col-md-6">
-						<img src="{% static 'img/stocks' %}/{{abbr}}.png" height="auto" width="100%">
 						<img src="{% static 'img/monte-carlo' %}/{{abbr}}.png" height="auto" width="100%">
 					</div>
 				</div>

@@ -14,6 +14,7 @@ import pandas as pd
 import os
 from code_app.machineLearningForStocks import do_ml
 from code_app.MonteCarloForStocks import runMonteCarlo
+from . import news
 
 @login_required()
 def stock(request, *args, **kwargs):
@@ -37,6 +38,25 @@ def stock(request, *args, **kwargs):
 
 	return render(request, 'stock.html', {'abbr':abbr, 'name':name, 'current_price': current_price, 'yesterday_price': yesterday_price, 
 				 'greater': greater, 'percent':percent, 'recommendation': recommendation, 'profit':profit, 'loss':loss})
+
+
+@login_required()
+def newspage(request):
+	stock_dataset = UserStock.objects.filter(user=request.user.id)
+
+	newsfeed = []
+
+	# for stock in stock_dataset:
+	a = news.Analysis(stock_dataset[0].stock_name)
+	newsfeed.extend(a.run())
+		
+	newslist = sorted(newsfeed, key=lambda article: article[1], reverse=True)
+	return render(request, 'newspage.html', {'newslist':newslist})
+
+
+@login_required()
+def realEstate(request):
+	return render(request, 'housing.html')
 
 
 @login_required()
@@ -72,10 +92,16 @@ def signup(request):
 
 
 def home(request):
+	a = news.Analysis('stocks')
+	l = a.run()
+	var = []
+	for i in l[0:5]:
+		var.append('https://www.google.com/search?q='+i[0]+'&source=lnms&tbm=nws')
+
 	if request.user.is_authenticated:
-		return render(request,'index.html', {'logged_in_user': request.user.get_username()})
+		return render(request,'index.html',{'var':var,'new_list':l,'logged_in_user' : request.user.get_username()})
 	else:
-		return render(request,'index.html', {'logged_in_user': False})
+		return render(request,'index.html',{'var':var,'new_list':l,'logged_in_user' : False})
 
 
 @login_required()
@@ -97,7 +123,12 @@ def dash(request):
 
 	stock_dataset = UserStock.objects.filter(user=request.user.id)
 	stock_data = []
+
+	newsfeed = []
+
 	for stock in stock_dataset:
+		a = news.Analysis(stock.stock_name)
+		newsfeed.append(a.run())
 		current = getStockPrice(stock.stock_name)
 		if current >= stock.price:
 			profit_bool = True
@@ -106,7 +137,11 @@ def dash(request):
 			profit_bool = False
 			diff = stock.price - current
 		diff = diff/current * 100
-		stock_data.append({'user': stock.user, 'stock_name': stock.stock_name,'ticker': getStockTickerFromName(stock.stock_name), 'price': stock.price, 'number': stock.number, 'current_price': current, 'profit_bool': profit_bool, 'diff': diff})
+		stock_data.append({'user': stock.user, 'stock_name': stock.stock_name,'ticker': getStockTickerFromName(stock.stock_name), 
+						'price': stock.price, 'number': stock.number, 'current_price': current, 'profit_bool': profit_bool, 'diff': diff})
+
+	newslist = sorted(newsfeed, key=lambda article: article[1], reverse=True)
+
 	return render(request, 'dashboard.html', {'user_stock_data': stock_data, 'form': AddStockTransactionForm()})
 
 """			Helper functions   			"""
